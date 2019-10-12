@@ -38,7 +38,9 @@ class User_model extends CI_Model {
 			'firstname' => $api_data->firstname,
 			'lastname' 	=> $api_data->lastname,
 			'email' 	=> $api_data->email,
-			'username' 	=> $api_data->username
+			'username' 	=> $api_data->username,
+			'created_at'=> date('Y-m-d H:i:s'),
+			'updated_at'=> date('Y-m-d H:i:s')
 		];
 
 		/**
