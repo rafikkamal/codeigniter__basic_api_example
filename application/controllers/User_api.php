@@ -11,7 +11,7 @@ class User_api extends CI_Controller {
 
 
 	public function user_get() {
-	    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+	    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		    $data = $this->User_model->getAll();
 		    $output = $this->jsonResponse([
 		    	'users'  => $data,
