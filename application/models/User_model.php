@@ -4,10 +4,16 @@ if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class User_model extends CI_Model {
 
+	private $table;
+
+	public function __construct() {
+		$this->table = "users";
+	} 
+
 	function getAll() {
 		$response = array();
 		$this->db->select('*');
-		$q = $this->db->get('users');
+		$q = $this->db->get($this->table);
 		$response = $q->result_array();
 
 		return $response;
@@ -15,7 +21,7 @@ class User_model extends CI_Model {
 
 
 	public function get($id) {
-		$data = $this->db->get_where("users", ['id' => $id])->row_array();
+		$data = $this->db->get_where($this->table, ['id' => $id])->row_array();
 		// var_dump($data);
 		// die();
 		return $data;
@@ -45,7 +51,7 @@ class User_model extends CI_Model {
 		// 	'username' 	=> $this->input->post('username')
 		// ];
 
-		$this->db->insert('users', $data);
+		$this->db->insert($this->table, $data);
     	return ($this->db->affected_rows() != 1) ? false : true;
 
 	}
@@ -53,14 +59,14 @@ class User_model extends CI_Model {
 
 	public function update($id) {
 		$api_data = json_decode($this->input->raw_input_stream);
-		$this->db->update('users', $api_data, array('id'=>$id));
+		$this->db->update($this->table, $api_data, array('id'=>$id));
     	return ($this->db->affected_rows() != 1) ? false : true;
 
 	}
 
 
 	public function delete($id) {
-		$this->db->delete('users', array('id'=>$id));
+		$this->db->delete($this->table, array('id'=>$id));
     	return ($this->db->affected_rows() != 1) ? false : true;
 	}
 
